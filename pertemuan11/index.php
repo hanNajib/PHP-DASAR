@@ -48,7 +48,7 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
                 <a href="update.php?id=<?php echo $row["id"]; ?>">ubah</a>
                 <a href="hapus.php?id=<?php echo $row["id"]; ?>" onclick="return confirm('Yakin?');">hapus</a>
             </td>
-            <td><img src=$row["gambar"]; alt=""></td>
+            <td><img src=<?php echo $row["gambar"]; ?> alt="" width="100px"></td>
             <td><?php echo $row["nrp"]; ?></td>
             <td><?php echo $row["nama"]; ?></td>
             <td><?php echo $row["email"]; ?></td>

@@ -3,7 +3,13 @@
 require 'function.php';
 
 // ambil data dari table mahasiswa / query data mahasiswa
-$mahasiswa = query("SELECT * FROM mahasiswa");
+$mahasiswa = query("SELECT * FROM mahasiswa ORDER BY id ASC");
+
+//tombol cari ditekan
+if(isset($_POST["cari"])) {
+    $mahasiswa = cari($_POST["keyword"]);
+}
+
 // ambil data (fetch) mahasiswa dari object result
 // mysqli_fetch_row() = mengembalikan array numerik
 // mysqli_fetch_assoc() = mengembalikan array assosiatif
@@ -27,6 +33,13 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
 <body>
     <h1>Daftar Mahasiswa</h1>
 
+    <a href="tambah.php">Tambah Data</a><br><br>
+
+    <form action="" method="post">
+        <input type="text" name="keyword" size="40" autofocus placeholder="Masukkan keyword pencarian" autocomplete="off">
+        <button type="submit" name="cari">Cari</button>
+    </form>
+
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>No.</th>
@@ -42,8 +55,8 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
         <tr>
             <td><?php echo $i; ?></td>
             <td>
-                <a href="">ubah</a>
-                <a href="">hapus</a>
+                <a href="update.php?id=<?php echo $row["id"]; ?>">ubah</a>
+                <a href="hapus.php?id=<?php echo $row["id"]; ?>" onclick="return confirm('Yakin?');">hapus</a>
             </td>
             <td><img src=<?php echo $row["gambar"]; ?> alt="" width="100px"></td>
             <td><?php echo $row["nrp"]; ?></td>
