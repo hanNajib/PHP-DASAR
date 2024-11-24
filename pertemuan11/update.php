@@ -3,15 +3,19 @@
 $conn = mysqli_connect("localhost", "root", "", "phpdasar");
 require 'function.php';
 
+$id = $_GET["id"];
+
+$mahasiswa = query("SELECT * FROM mahasiswa WHERE id = $id")[0];
+
 if( isset($_POST["submit"]) ) {
-    if(tambah($_POST) > 0) {
+    if(update($_POST, $id) > 0) {
         echo "<script>
-                alert('Data Berhasil Ditambahkan');
+                alert('Data Berhasil Diubah');
                 document.location.href = 'index.php';
             </script>";
     } else {
         echo "<script>
-                alert('Data Gagal Ditambahkan');
+                alert('Data Gagal Diubah');
                 document.location.href = 'index.php';
             </script>";
     }
@@ -26,33 +30,33 @@ if( isset($_POST["submit"]) ) {
     <title>Tambah Data</title>
 </head>
 <body>
-    <h1>Tambah Data</h1>
+    <h1>Ubah Data</h1>
 
     <form action="" method="POST">
 
     <ul>
         <li>
             <label for="nama">Nama :</label>
-            <input type="text" name="nama">
+            <input type="text" name="nama" value="<?= $mahasiswa["nama"]; ?>">
         </li>
         <li>
             <label for="nrp">NRP :</label>
-            <input type="text" name="nrp">
+            <input type="text" name="nrp" value="<?= $mahasiswa["nrp"]; ?>">
         </li>
         <li>
             <label for="email">Email :</label>
-            <input type="email" name="email">
+            <input type="email" name="email" value="<?= $mahasiswa["email"]; ?>">
         </li>
         <li>
             <label for="jurusan">Jurusan :</label>
-            <input type="text" name="jurusan">
+            <input type="text" name="jurusan" value="<?= $mahasiswa["jurusan"]; ?>">
         </li>
         <li>
             <label for="gambar">Gambar</label>
-            <input type="text" name="gambar"> <br> <br>
+            <input type="text" name="gambar" value="<?= $mahasiswa["gambar"]; ?>"> <br> <br>
         </li>
         <li>
-            <button type="submit" name="submit">Kirim</button> 
+            <button type="submit" name="submit">Ubah Data</button> 
         </li>
     </ul>
 
